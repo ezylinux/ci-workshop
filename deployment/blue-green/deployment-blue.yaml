@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-#USER#-green
+  name: app-#USER#-blue
   namespace: #USER#
   labels:
     app: app-user-blue
