@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: app-${USER}-ingress
+spec:
+  rules:
+  - host: ${USER}.cicdworkshop.ezylinux.com
+    http:
+      paths:
+      - backend:
+          serviceName: app-${USER}-service
+          servicePort: 80      
+  - host: ${USER}-a.cicdworkshop.ezylinux.com
+    http:
+      paths:
+      - backend:
+          serviceName: app-${USER}-service
+          servicePort: 80  
+  - host: ${USER}-b.cicdworkshop.ezylinux.com
+    http:
+      paths:
+      - backend:
+          serviceName: app-${USER}-service-new
+          servicePort: 80
