@@ -1,4 +1,3 @@
-def RESP = ""
 pipeline {
     agent any
     environment {
@@ -15,13 +14,9 @@ pipeline {
                 deleteDir();
                 git branch: 'master',
                     url: "https://github.com/${env.USERGITHUB}/ci-workshop.git"
-                    
-                script {
-                    version = sh(script: "git log", returnStdout: true).trim()
-                }
-                
             }
         }
+        
         stage("Unit test") {
             steps {
                 withDockerContainer("peerapach/python:3.6") {
@@ -32,6 +27,7 @@ pipeline {
                 }
             }
         }        
+        
         stage("Build image") {
             steps {
                 sh """
@@ -42,6 +38,7 @@ pipeline {
                 }
             }
         }
+        
         stage("Push image") {
             steps {
                 script {
@@ -56,7 +53,7 @@ pipeline {
             steps{
                 script {
                     RESP = sh(script: "curl --write-out %{http_code} --silent -m 5 --output /dev/null ${USERID}-green.workshop.ezylinux.com",
-                                                    returnStdout: true).trim()
+                                       returnStdout: true).trim()
                     println(RESP)
                     if (RESP == "200") {
                         sh """
@@ -76,7 +73,6 @@ pipeline {
                         deploySide = "green"                            
                         
                     }
-                    
                     println deploySide
                 }
                 sh """
