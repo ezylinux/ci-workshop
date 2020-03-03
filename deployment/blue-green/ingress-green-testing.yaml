@@ -6,7 +6,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       if ( $http_test ) {
-        set $service_name "app-#USER#-service-green"
+        set $proxy_upstream_name "#USER#-app-#USER#-service-green-80"
       }  
 spec:
   rules:
