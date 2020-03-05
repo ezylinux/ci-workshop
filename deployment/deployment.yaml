@@ -1,23 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-#USER#
+  name: app-#USER#-blue 
   namespace: #USER#
   labels:
-    app: app-user
+    app: app-user-blue
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: app-user
+      app: app-user-blue
   template:
     metadata:
       labels:
-        app: app-user
+        app: app-user-blue
     spec:
       containers:
-      - name: app-user
+      - name: app-user-blue
         image: #DOCKER-HUB-USERNAME#/#APPUSER#
         ports:
         - containerPort: 5000
-
+        resources:
+          limits:
+            cpu: 50m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
