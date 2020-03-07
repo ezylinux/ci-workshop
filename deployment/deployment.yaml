@@ -6,7 +6,7 @@ metadata:
   labels:
     app: app-user-blue
 spec:
-  replicas: 4
+  replicas: 3
   selector:
     matchLabels:
       app: app-user-blue
@@ -23,10 +23,10 @@ spec:
         resources:
           limits:
             cpu: 50m
-            memory: 512Mi
+            memory: 100Mi
           requests:
             cpu: 50m
-            memory: 128Mi
+            memory: 50Mi
         readinessProbe:
           httpGet:
             path: /
